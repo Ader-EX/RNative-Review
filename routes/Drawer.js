@@ -9,6 +9,7 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
+import { ImageBackground } from "react-native";
 
 const rootDrawer = createDrawerNavigator();
 

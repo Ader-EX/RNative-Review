@@ -5,6 +5,8 @@ import {
   Text,
   FlatList,
   TouchableOpacity,
+  Modal,
+  Keyboard,
 } from "react-native";
 import { globalStyles } from "../styles/global";
 import { AppLoading } from "expo";
@@ -12,6 +14,8 @@ import { Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import CustomCard from "../shared/CustomCard";
+import CustomForm from "../shared/CustomForm";
+import { TouchableWithoutFeedback } from "react-native-web";
 
 export default function Home() {
   const [reviews, setReviews] = useState([
@@ -34,9 +38,37 @@ export default function Home() {
       key: "3",
     },
   ]);
+
+  const addReview = (review) => {
+    review.key = Math.random().toString();
+    setReviews((curReviews) => {
+      return [review, ...curReviews];
+    });
+    setIsVis(false);
+  };
+  const [isVis, setIsVis] = useState(false);
   const navigation = useNavigation();
   return (
     <View style={globalStyles.container}>
+      <Modal visible={isVis} animationType="slide">
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss()}>
+          <View style={styles.modalShow}>
+            <CustomForm addReview={addReview} />
+            <Button
+              title="Cancel"
+              onPress={() => {
+                setIsVis(false);
+              }}
+            />
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
+
+      <TouchableOpacity onPress={() => setIsVis(true)}>
+        <View style={styles.addButton}>
+          <Text style={globalStyles.icona}>+</Text>
+        </View>
+      </TouchableOpacity>
       <FlatList
         data={reviews}
         renderItem={({ item }) => (
@@ -50,3 +82,22 @@ export default function Home() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  modalShow: {
+    flex: 1,
+    padding: 10,
+  },
+  addButton: {
+    borderColor: "#333",
+    opacity: 0.4,
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    margin: 10,
+    alignItems: "center",
+    fontWeight: "bold",
+
+    justifyContent: "center",
+  },
+});

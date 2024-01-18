@@ -15,4 +15,16 @@ export const globalStyles = StyleSheet.create({
     lineHeight: 20,
     fontFamily: "regular",
   },
+  icona: {
+    fontWeight: "bold",
+    fontSize: 30,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ddd",
+    padding: 10,
+    fontSize: 18,
+    borderRadius: 6,
+    marginVertical: 10,
+  },
 });
