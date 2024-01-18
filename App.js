@@ -1,7 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import Home from "./screens/Home";
-import { StyleSheet, Text, View } from "react-native";
+
 import * as Font from "expo-font";
+import AppLoading from "expo-app-loading";
+
+import React, { useState } from "react";
+import HomeStack from "./routes/HomeStack";
+import { NavigationContainer } from "@react-navigation/native";
+import Drawer from "./routes/Drawer";
 
 const getFonts = () => {
   return Font.loadAsync({
@@ -11,9 +17,16 @@ const getFonts = () => {
 };
 
 export default function App() {
-  return (
-    <View>
-      <Home />
-    </View>
-  );
+  const [isFontLoaded, setIsFontLoaded] = useState(false);
+  if (isFontLoaded) {
+    return <Drawer />;
+  } else {
+    return (
+      <AppLoading
+        startAsync={getFonts}
+        onFinish={() => setIsFontLoaded(true)}
+        onError={console.warn}
+      />
+    );
+  }
 }
