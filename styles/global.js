@@ -6,7 +6,7 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
   },
   titletext: {
-    fontSize: 18,
+    fontSize: 16,
     color: "#333",
     fontFamily: "bold",
   },
