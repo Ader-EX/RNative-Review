@@ -16,6 +16,7 @@ import { useState } from "react";
 import CustomCard from "../shared/CustomCard";
 import CustomForm from "../shared/CustomForm";
 import { TouchableWithoutFeedback } from "react-native-web";
+import CustomButton from "../shared/CustomButton";
 
 export default function Home() {
   const [reviews, setReviews] = useState([
@@ -54,7 +55,7 @@ export default function Home() {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss()}>
           <View style={styles.modalShow}>
             <CustomForm addReview={addReview} />
-            <Button
+            <CustomButton
               title="Cancel"
               onPress={() => {
                 setIsVis(false);

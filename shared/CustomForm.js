@@ -3,6 +3,7 @@ import React from "react";
 import { StyleSheet, View, Text, TextInput, Button } from "react-native";
 import { globalStyles } from "../styles/global";
 import * as yup from "yup";
+import CustomButton from "./CustomButton";
 
 const ReviewSchema = yup.object({
   title: yup.string().required().min(4),
@@ -52,6 +53,8 @@ export default function CustomForm({ addReview }) {
               {props.touched.title && props.errors.title}
             </Text>
             <TextInput
+              multiline
+              minHeight={100}
               placeholder=" Description"
               style={[globalStyles.paragraph, globalStyles.input]}
               onChangeText={props.handleChange("body")}
@@ -72,7 +75,7 @@ export default function CustomForm({ addReview }) {
             <Text style={globalStyles.errorText}>
               {props.touched.rating && props.errors.rating}
             </Text>
-            <Button title="Submit" onPress={props.handleSubmit} />
+            <CustomButton title="Submit" onPress={props.handleSubmit} />
           </View>
         )}
       </Formik>
